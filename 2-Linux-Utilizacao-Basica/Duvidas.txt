@@ -1,0 +1,185 @@
+# Linux: Utilização Básica
+2023-04-27 15:00 até 18:00          
+
+# Comandos de consulta: cat, tail, head, grep e find.
+# Gestão de processos: proc, top, kill, jobs, fg e bg.
+# Gestão de pacotes: apt search, apt install e apt remove.
+# Gestão de serviços: systemctl, service e journalctl.
+# Comandos de verificação de espaço: df, du, free e ncdu
+# Mais sobre VIM.
+
+Comandos de Consulta
+
+Comandos úteis para consultar o conteúdo de arquivos.
+
+E também comandos úteis para encontrar arquivos e pastas.
+
+cat - Apresenta o conteúdo de um arquivo.
+
+Imprime no terminal o conteúdo do arquivo:
+    cat /etc/lsb-release
+
+head - Apresenta a parte inicial de arquivos.
+
+Um trecho inicial do arquivo:
+    head ~/.bash_history
+    
+Apenas as duas primeiras linhas:
+    head -n 2 ~/.bash_history
+
+tail - Apresenta a parte final de arquivos.
+
+Um trecho final do arquivo:
+    tail ~/.bash_history
+
+Apenas as duas últimas linhas:
+    tail -n 2 ~/.bash_history
+
+grep - Realiza a pesquisa de palavras chaves.
+
+Procurar a palavra team na pasta /etc/apt:
+    grep -r team /etc/apt
+
+Filtra o conteúdo gerado apenas apresentando as linhas que contém a palavra Ubuntu:
+    cat /etc/lsb-release | grep Ubuntu
+
+Ignora maiúsculas e minúsculas, ou seja case insensitive:
+    cat /etc/lsb-release | grep -i ubuntu
+
+Para apresentar o número da linha podemos acrescentar a parametrização n:
+    cat /etc/lsb-release | grep -in ubuntu
+
+E como procurar a palavra TEAM recursivamente, independende de letras maiúsculas e minúsculas na pasta /etc/apt mas apresentando o número da linha:
+    grep -rin team /etc/apt
+
+find - Realiza a procura de arquivos.
+
+Exemplos da procura de arquivos com o nome lsb-release na pasta /etc:
+    find /usr -name lsb-release
+
+    find /usr -name 'lsb*release'
+
+Procura a pasta que se chama apt:
+    find /usr -name mime -type d
+
+Lista todos os arquivos da pasta /usr/bin, e filtra com o grep:
+    find /usr/bin | grep pwd
+======================================================================================================================================
+Gestão de Processos
+
+Comandos que permitem realizar a gestão dos programas em execução.
+
+Cada processo em execução tem um ID que serve para identificá-lo, assim é chamado de PID = Process ID.
+
+top ou htop - Lista os processos em execução e o respectivo consumo de hardware.
+
+Contém a informação em tempo real do que cada processo está utilizando a nível de processador (CPU) e memória (MEM).
+
+Também apresenta informações úteis para identificar o processo, como o PID e o usuário que executou o processo, e ainda o comando (programa) do processo.
+
+top ou htop
+
+kill - Encerra processos que estejam em execução.
+
+Envia o sinal de conclusão para o processo e assim permite o processo encerrar normalmente:
+    kill 3945195
+
+Mata o processo imediatamente:
+    kill -9 3945195
+
+jobs - Lista os processos da sessão que estão sendo utilizados para trabalhar.
+
+Cada processo de trabalho tem um ID simples para ajudar na gestão da utilização.
+
+Assim podemos no mesmo terminal executar várias coisas em paralelo e conseguir interagir com elas, como se fosse multi tarefas.
+
+Utilizando as teclas CTRL + Z enviamos o que está executando para background, deixa de ser a tarefa principal, mas fica no estado suspenso.
+
+Lista as tarefas e o seu respectivo estado:
+    jobs
+
+bg - Sinaliza que a tarefa pode ser executada em background.
+
+Muda o estado de suspenso para continuar a execução nos fundos, ou seja por trás.
+    bg 3945195
+
+fg - Sinaliza que a tarefa pode voltar a funcionar em foreground.
+
+Trás a tarefa para o primeiro plano, ou seja, volta a ser a tarefa principal.
+    fg 3945195
+======================================================================================================================================
+Verificação do Espaço
+
+df - Apresenta o consumo dos discos, HDs e outros dispositivos de armazenamento que estão configurados.
+    df -h
+
+du - Apresenta o consumo de espaço global de pastas.
+    du -hs
+
+Visualiza o espaço global de memória RAM alocada e disponível no sistema:
+    free -g
+
+======================================================================================================================================
+Mais sobre VIM.
+
+Mais alguns comandos úteis do VIM:
+
+gg - Leva o cursor para o início do arquivo.
+
+GG - Leva o cursor para o início do arquivo.
+
+?palavra - Realiza a pesquisa de uma palavra.
+
+N - Avança para a próxima palavra pesquisada.
+
+CTRL + B - Volta uma página, equivalente a uma tela.
+
+CTRL + F - Avança uma página, equivalente a uma tela.
+
+v - Faz a seleção de conteúdo.
+
+y - Copia o conteúdo selecionado.
+
+p - Cola o conteúdo copiado.
+
+:set ic - Permite ativar a pesquisa para o modo de case insensitive, não distingue maiúsculas de minúsculas.
+
+Conteúdo Adicional
+Para aprofundar mais estude o conteúdo e pratique os exercícios de outra sessão mais avançada.
+    -> https://dev.netuno.org/formation/session/e22d84f3-5b7f-4ed8-9940-2702f76bf295
+
+=======================================================================================================================================
+Exercícios
+
+Parte 1
+    Procure o arquivo update-notifier-common na pasta /etc.
+    Procure o arquivo ssh_config no sistema.
+    Com o comando cat apresente o conteúdo do arquivo ssh_config.
+    Com o comando grep encontre as linhas que contém auth no arquivo ssh_config.
+
+Parte 2
+    Procure o arquivo .bashrc que está na raíz da pasta do seu usuário de sistema.
+    Abra o arquivo .bashrc no editor de texto.
+    Vá até o fim do arquivo e adicione algumas linhas em branco, certifique que não altera nada neste arquivo indevidamente.
+    No fim do arquivo adicione, por exemplo:
+    echo "Olá! Você esta acessando um terminal Linux."
+    Você pode customizar a frase como achar melhor. 5. Abra uma nova sessão do seu terminal e verifique se a mensagem aparece.
+
+Parte 3
+    Abra o arquivo .bashrc no editor de texto.
+    Mova a linha da mensagem adicionada na parte 2 para o topo do arquivo.
+    Grave os dados sem fechar o editor e envie o editor para background.
+    De volta ao terminal verifique se o editor continua executando como um job.
+    Teste se o comportamento da mensagem mantém o mesmo abrindo um novo terminal, sem fechar o terminal atual.
+    Coloque o editor de volta como foreground e remova a linha da mensagem, grave e feche o editor.
+
+Parte 4
+    Explore os processos sendo executados no sistema.
+    Analise o espaço do HD do sistema.
+    Veja qual o tamanho da sua pasta de usário.
+    Verifique o consumo de memória do sistema.
+
+Praticar Um Pouco Mais
+
+Para aprofundar mais estude o conteúdo e pratique os exercícios de outra sessão mais avançada. - 
+    https://dev.netuno.org/formation/session/e22d84f3-5b7f-4ed8-9940-2702f76bf295

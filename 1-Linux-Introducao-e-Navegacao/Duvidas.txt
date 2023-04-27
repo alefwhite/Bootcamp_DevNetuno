@@ -1,0 +1,262 @@
+Linux: Estrutura e Navegação
+2023-04-25 12:00 até 15:00        
+
+# História e importância, noções gerais do terminal, estrutura de diretórios e introdução ao VIM.
+# Comandos de navegação: cd, ls, pwd, mv, cp e rm.
+# Comandos de criação: mkdir, touch, echo e date.
+# Comandos de permissões: chown e chmod.
+
+Distro usadada em aula - Linux Lite 
+
+Opções de Distro - https://voyagerlive.org/
+
+Wine - Permite rodar programas do windows no linux
+
+1 - Listar arquivos e pastas de um diretório -> ls
+    Parametros
+    1 - ls -1
+    2 - ls -l
+    3 - ls -rato - hash com d = diretório | -r = arquivo
+    4 - ls --color
+
+2 - Lista o caminho até o diretório que você está dentro - pwd
+    1. Inicio de um diretório no Windows C:\ | Linux /home
+
+3 - Mudar de diretório - cd nome_do_diretorio 
+    1 - cd .  - Diretório onde estou
+    2 - cd .. - Volta um diretório
+    3 - ls .
+    4 - ls ..
+    5 - ls ../../..
+
+4 - Criar uma pasta - mkdir
+
+5 - Renomear uma pasta - mv minha_pasta minha-pasta
+
+6 - Criar um arquivo - touch meu_arquivo.txt
+
+7 - Deletar uma pasta ou arquivo - rm nome_da_pasta_ou_arquivo
+    1 - rm -d  nome_da_pasta
+    2 - rm -df pasta_com_arquivo_dentro
+    3 - rm -fr nome_da_pasta
+        -f          Força a remoção dos arquivos sem perguntar ao usuário.
+        -r, -R      Remove um diretório e todo o seu conteúdo.
+        -i          Pergunta antes de remover
+        -d, –dir    Remove diretórios vazios
+
+
+8 - Vim - https://vim-adventures.com/
+    vim nome_do_arquivo - Sempre prestar a atenção no rodapé do editor
+    Modo de inserção - i
+    Sair da edição mesmo que não tenha salvo a alteração - :q!
+    Sair após ter gravado a modificação do arquivo - :q
+    Gravar alteração - :w
+    Gravar alteração e sair - :wq
+    Deleta o que está selecionado - x:
+    Copia o que está selecionado - y: 
+    Entra no modo de edição substituindo o que tinha antes - s: 
+    Recorta o código selecionado - c:
+
+=======================================================================================================================================
+MATERIAL DA AULA
+
+Introdução
+
+O Linux é de longe o sistema operacional mais utilizado no planeta.
+
+Por isso o Linux é a base dos smartphones Android, smart TV, modens e routers, principais servidores na internet, 
+é o sistema utilizado nos servidores das redes sociais, e muito mais.
+
+O Linux é o sistema operacional que permite existir soluções como microsserviços e kubernetes.
+
+Mais sobre o Linux.
+
+Noções Gerais do Terminal
+
+Ao entrar no terminal vemos isto:
+
+root@dev:~# ls
+
+Onde o root é o nome do usuário, já o dev é o nome dado ao sistema que estamos utilizando e o ls é o comando que está sendo executado.
+
+O ~ quer dizer que os comandos estão sendo executados na pasta principal (home) do usuário.
+
+Neste outro caso:
+
+root@dev:/var/log# ls -rato
+
+O ~ passou para /var/log, quer dizer que agora os comandos vão ser executados nesta pasta.
+
+O -rato a frente do comando ls são parametrizações que podem ser passadas para o comando, cada comando tem parametrizações específicas.
+
+Estrutura de Diretórios
+/ - O diretório raiz Tudo em seu sistema Linux está localizado no diretório /, 
+conhecido como diretório raiz. Você pode pensar no diretório / como sendo semelhante ao diretório C:\ no Windows, 
+mas isso não é estritamente verdade, pois o Linux não possui letras de unidade. 
+Enquanto outra partição estaria localizada em D:\ no Windows, essa outra partição apareceria em outra pasta em / no Linux.
+
+/etc - Arquivos de configuração O diretório /etc contém arquivos de configuração, que geralmente podem ser editados manualmente 
+em um editor de texto. Observe que o diretório /etc/ contém arquivos de configuração de todo o sistema, 
+os arquivos de configuração específicos do usuário estão localizados no diretório inicial de cada usuário.
+
+/home - Pastas iniciais O diretório /home contém uma pasta pessoal para cada usuário. Por exemplo, se seu nome de usuário for bob, 
+você terá uma pasta pessoal localizada em /home/bob. Essa pasta inicial contém os arquivos de dados do usuário e os arquivos 
+de configuração específicos do usuário. Cada usuário só tem acesso de gravação à sua própria pasta pessoal e deve obter permissões 
+elevadas (tornar-se o usuário root) para modificar outros arquivos no sistema.
+
+/root - Diretório inicial raiz O diretório /root é o diretório inicial do usuário root. Em vez de estar localizado em /home/root, 
+está localizado em /root. Isso é diferente de /, que é o diretório raiz do sistema.
+
+/srv - Dados de serviço O diretório /srv contém "dados para serviços fornecidos pelo sistema". 
+Se você estivesse usando o servidor Apache HTTP para servir um site, provavelmente armazenaria os arquivos do seu site 
+em um diretório dentro do diretório /srv.
+
+/tmp - Arquivos Temporários Os aplicativos armazenam arquivos temporários no diretório /tmp. 
+Esses arquivos geralmente são excluídos sempre que o sistema é reiniciado e podem ser excluídos a qualquer momento por utilitários 
+como o tmpwatch.
+
+/var - Arquivos de dados variáveis O diretório /var é a contrapartida gravável do diretório /usr, que deve ser somente leitura 
+em operação normal. Os arquivos de log e tudo o mais que normalmente seria gravado em /usr durante a operação normal são gravados 
+no diretório /var. Por exemplo, você encontrará arquivos de log em /var/log.
+
+Existe muitas outras pastas raíz do sistema, mais detalhes aqui. -
+https://dev.netuno.org/formation/session/5276001b-8ea0-4b81-b236-857a83a518ef
+
+Comandos de Navegação
+cd - change directory ou popularmente conhecido como cai dentro
+
+Muda o terminal de diretório, exemplos:
+
+cd /
+cd /var/log
+cd ~
+ls - list directory
+
+Listar diretório, exemplos:
+
+ls -1
+ls -m
+ls -rato
+ls -altr
+pwd - print working directory
+
+Imprimir o caminho completo do diretório atual.
+
+Comandos de Criação
+mkdir - make directory
+
+Cria uma pasta, por exemplo:
+
+mkdir nova-pasta
+Cria todas as pastas necessárias:
+
+mkdir -p pai/filho/neto
+touch - inicia um arquivo vazio
+
+Também atualiza os horários de acesso e modificação do arquivo para o horário atual, marca como alterado.
+
+Mas é muito utilizado para cria o arquivo quando ele não existe.
+
+Para criar ou marcar que o arquivo foi alterado:
+
+touch meu-arquivo.txt
+Cria múltiplos arquivos:
+
+touch arquivo-1.txt arquivo-2.txt arquivo-3.txt
+touch arquivo-{1..3}.txt
+Comandos de Manipulação
+mv - move directory
+
+Move diretórios e arquivos, por exemplo:
+
+mv meu-arquivo.txt arquivo.txt
+mv ~/nova-pasta ~/pasta1
+cp - copy
+
+Copia diretórios e arquivos.
+
+Exemplo para copiar arquivo:
+
+cp /etc/hosts ~/hosts.backup
+Exemplo para copiar pasta:
+
+cp -r /usr/share/sounds ~/system-sounds
+rm - remove
+
+Eliminar diretórios e arquivos.
+
+Exemplo para remover arquivo:
+
+rm ~/hosts.backup
+Exemplo para remover pasta:
+
+rm -r ~/system-sounds
+
+Introdução ao VIM
+Para criar ou editar um arquivo:
+
+vim arquivo.txt
+Ao pressionar a tecla i aparece na última linha: insert
+
+Quando utilizar o VIM observe sempre a última linha da tela do terminal, é onde é indicado o modo que está ativo.
+
+Isto quer dizer que agora tudo o que for digitado vai fazer parte do conteúdo do arquivo.
+
+Ao pressionar a tecla Esc o insert desaparece da última linha do terminal.
+
+Isto quer dizer que agora podemos enviar algum comandos para o vim, por exemplo:
+
+:wq
+O : indica que será enviado comandos. O w quer dizer write, indica que deve realizar a escrita ou gravação dos dados. 
+E o q quer dizer quit, ou seja é para sair.
+
+Para sair sem gravar as alterações deve utilizar:
+
+:q!
+O ! serve para forçar, ou não pergunte nada e apenas faça.
+
+Conteúdo Adicional
+Para aprofundar mais estude o conteúdo e pratique os exercícios de outra sessão mais avançada. - 
+https://dev.netuno.org/formation/session/5276001b-8ea0-4b81-b236-857a83a518ef
+=======================================================================================================================================
+Exercícios
+
+Parte 1
+    Descubra onde ficam as pastas principais dos usuários do sistema. 
+        -> cd / | cd home | ls
+        -> pwd | cd .. | ls
+
+    Copiar o arquivo cron para a pasta principal do teu usuário, este arquivo de cron está em algum lugar dentro da pasta etc e init.d.
+        -> cd / | cd home | cd etc | cd init.d | cp /etc/init.d/cron /home/alef | ls
+        
+    Entenda e analise as diferenças entre pasta e arquivos com os caminhos /var/log e /usr/share/menu/bash.
+        -> cd / | cd var | ls -rato - log é um diretório 
+        -> cd / | cd usr | cd share/menu/ | ls -rato | - bash é um arquivo
+
+    O arquivo executável do comando ls fica em qual pasta?
+        -> /usr/bin - Resposta Correta
+        /sbin
+        /bin
+        /usr/sbin
+
+Parte 2
+    Remova o arquivo cron copiado anteriormente, que está na pasta do teu usuário.
+        -> cd /home/alef | rm cron e rm -r cron se fosse pasta
+
+    Crie a seguinte estrutura dentro da tua pasta de usuário: animais/especies
+        -> cd /home/alef | mkdir animais | mkdir animais/especies
+
+    Crie alguns arquivos de texto na pasta na pasta animais/especies com o vim.
+        -> touch leao.txt | ls | vim leao.txt | i | esc | :wq | vim leao.txt para ver se salvou
+        -> touch rato.txt | ls | rato leao.txt | i | esc | :wq | vim rato.txt para ver se salvou
+
+Parte 3
+    Crie algumas pastas com o nome de algumas espécies dentro do caminho animais/especies,
+    e dentro destas pastas crie um arquivo de texto chamado info.txt que deve conter informações adicionais sobre a espécie, 
+    como nome científico, família, etc.
+
+    Crie uma pasta com o nome de cada um dos participantes, dentro desta pasta deverá ter outra pasta com o sobrenome, 
+    sendo que dentro deverá ter o nome dos principais passatempos que cada um tem.
+    
+    Crie uma estrutura com pelo menos 5 níveis de pastas, acrescente pelo menos 3 arquivos e remova a pasta inicial recursivamente.
+
